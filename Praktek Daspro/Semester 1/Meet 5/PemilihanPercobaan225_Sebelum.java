@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class PemilihanPercobaan225 {
+public class PemilihanPercobaan225_Sebelum {
     public static void main(String[] args) {
         Scanner input25 = new Scanner(System.in);
         System.out.println("Nilai uas : ");
