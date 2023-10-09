@@ -73,9 +73,7 @@ public class main {
                         break;
                 }
             } else {
-                System.out.println("==================================================");
-                System.out.println(" Silahkan masuk terlebih dahulu sebelum memesan ");
-                System.out.println("==================================================");
+                System.out.println("-");
             }
         }
     }
@@ -109,7 +107,7 @@ public class main {
     }
 
     private static void login(Scanner scanner) {
-        System.out.println("=======");
+        System.out.println("========");
         System.out.println(" Masuk ");
         System.out.println("=======");
         System.out.print("Masukkan Username : ");
@@ -118,17 +116,21 @@ public class main {
         String password = scanner.nextLine();
 
         User user = userMap.get(username);
-
-        if (user != null && user.getPassword().equals(password)) {
-            System.out.println("==================================================");
-            System.out.println(" Masuk Berhasil. Selamat Datang, " + username + "!");
-            System.out.println("==================================================");
-            isLoggedIn = true;
-            loggedInUser = user;
+        if(user != null){
+            if( user.getPassword().equals(password)) {
+                System.out.println("==================================================");
+                System.out.println(" Masuk Berhasil. Selamat Datang, " + username + "!");
+                System.out.println("==================================================");
+                isLoggedIn = true;
+                loggedInUser = user;
+            } else {
+                System.out.println("Password dan Username anda salah");
+            }
+        }else{
+            System.out.println("Username atau Password tidak diketahui, coba ulangi lagi !");
         }
     }
 }
-
 
 class User {
     private String nik;
