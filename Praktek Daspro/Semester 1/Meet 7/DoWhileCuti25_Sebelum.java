@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class DoWhileCuti25_Sebelum1 {
+public class DoWhileCuti25_Sebelum {
     public static void main(String[] args) {
         Scanner input25 = new Scanner(System.in);
         int jatahCuti, jumlahHari;
