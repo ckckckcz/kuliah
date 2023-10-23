@@ -1,8 +1,9 @@
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Arrays;
 
-public class main {
+public class Main {
     private static Map<String, User> userMap = new HashMap<>();
     private static boolean isLoggedIn = false;
     private static User loggedInUser = null;
@@ -26,54 +27,22 @@ public class main {
                     createAccount(scanner);
                     break;
                 case 2:
-                    login(scanner);
+                    loggedInUser = login(scanner);
+                    if (loggedInUser != null) {
+                        userMenu(scanner);
+                    }
                     break;
                 case 3:
                     System.out.println("======================================");
                     System.out.println(" Selamat Tinggal Sampai Jumpa Lagi ! ");
                     System.out.println("======================================");
                     System.exit(0);
+                    break;
                 default:
                     System.out.println("==============================================");
                     System.out.println(" Pilihanmu tidak diketahui, mohon coba lagi ");
                     System.out.println("==============================================");
                     break;
-            }
-
-            if (isLoggedIn) {
-                System.out.println("1. Check-in");
-                System.out.println("2. Lihat Booking");
-                System.out.println("3. Informasi User");
-                System.out.println("4. Keluar");
-                System.out.print("Masukkan Pilihamu : ");
-                int userChoice = scanner.nextInt();
-                scanner.nextLine();
-
-                switch (userChoice) {
-                    case 1:
-                        loggedInUser.checkIn(scanner);
-                        break;
-                    case 2:
-                        loggedInUser.viewBooking();
-                        break;
-                    case 3:
-                        loggedInUser.informasiUser();
-                        break;
-                    case 4:
-                        System.out.println("=====================");
-                        System.out.println(" Anda Sudah Logout ");
-                        System.out.println("=====================");
-                        isLoggedIn = false;
-                        loggedInUser = null;
-                        break;
-                    default:
-                        System.out.println("=============================================");
-                        System.out.println(" Pilihanmu tidak diketahui, mohon coba lagi ");
-                        System.out.println("=============================================");
-                        break;
-                }
-            } else {
-                System.out.println("-");
             }
         }
     }
@@ -106,28 +75,113 @@ public class main {
         loggedInUser = newUser;
     }
 
-    private static void login(Scanner scanner) {
+    private static User login(Scanner scanner) {
         System.out.println("========");
         System.out.println(" Masuk ");
         System.out.println("=======");
-        System.out.print("Masukkan Username : ");
-        String username = scanner.nextLine();
-        System.out.print("Masukkan Kata Sandi : ");
-        String password = scanner.nextLine();
 
-        User user = userMap.get(username);
-        if(user != null){
-            if( user.getPassword().equals(password)) {
+        while (true) {
+            System.out.print("Masukkan Username : ");
+            String username = scanner.nextLine();
+            System.out.print("Masukkan Kata Sandi : ");
+            String password = scanner.nextLine();
+
+            User user = userMap.get(username);
+            if (user != null && user.getPassword().equals(password)) {
                 System.out.println("==================================================");
                 System.out.println(" Masuk Berhasil. Selamat Datang, " + username + "!");
                 System.out.println("==================================================");
-                isLoggedIn = true;
-                loggedInUser = user;
+                return user;
             } else {
-                System.out.println("Password dan Username anda salah");
+                System.out.println("=======================================================");
+                System.out.println("Login gagal. Username atau password salah. Coba lagi.");
+                System.out.println("=======================================================");
+                System.out.println("1. Coba lagi");
+                System.out.println("2. Kembali ke menu utama");
+                System.out.print("Masukkan pilihan: ");
+                int loginChoice = scanner.nextInt();
+                scanner.nextLine();
+                if (loginChoice == 2) {
+                    return null;  // Kembali ke menu utama
+                }
             }
-        }else{
-            System.out.println("Username atau Password tidak diketahui, coba ulangi lagi !");
+        }
+    }
+
+    private static void userMenu(Scanner scanner) {
+        while (true) {
+            System.out.println("1. Check-in");
+            System.out.println("2. Lihat Booking");
+            System.out.println("3. Informasi User");
+            System.out.println("4. Sortir User");
+            System.out.println("5. Cari User");
+            System.out.println("6. Keluar");
+            System.out.print("Masukkan Pilihanmu : ");
+            int userChoice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (userChoice) {
+                case 1:
+                    loggedInUser.checkIn(scanner);
+                    break;
+                case 2:
+                    loggedInUser.viewBooking();
+                    break;
+                case 3:
+                    loggedInUser.informasiUser();
+                    break;
+                case 4:
+                    sortUsers();
+                    break;
+                case 5:
+                    searchUser(scanner);
+                    break;
+                case 6:
+                    System.out.println("=====================");
+                    System.out.println(" Anda Sudah Logout ");
+                    System.out.println("=====================");
+                    isLoggedIn = false;
+                    loggedInUser = null;
+                    return;
+                default:
+                    System.out.println("=============================================");
+                    System.out.println(" Pilihanmu tidak diketahui, mohon coba lagi ");
+                    System.out.println("=============================================");
+                    break;
+            }
+        }
+    }
+
+    private static void sortUsers() {
+        User[] users = userMap.values().toArray(new User[0]);
+        Arrays.sort(users, (user1, user2) -> user1.getUsername().compareTo(user2.getUsername()));
+
+        System.out.println("====================================================");
+        System.out.println("Daftar Pengguna setelah diurutkan berdasarkan Username");
+        System.out.println("====================================================");
+        for (User user : users) {
+            System.out.println(user.getUsername());
+        }
+    }
+
+    private static void searchUser(Scanner scanner) {
+        System.out.print("Masukkan Username yang ingin Anda cari: ");
+        String usernameToSearch = scanner.nextLine();
+        User user = userMap.get(usernameToSearch);
+
+        if (user != null) {
+            System.out.println("===================================");
+            System.out.println("Informasi User yang Anda Cari:");
+            System.out.println("===================================");
+            System.out.println("NIK: " + user.getNik());
+            System.out.println("Username: " + user.getUsername());
+            System.out.println("Tanggal Lahir: " + user.getDateOfBirth());
+            System.out.println("No Telephone: " + user.getPhoneNumber());
+            System.out.println("Alamat: " + user.getAddress());
+        } else {
+            System.out.println("====================================");
+            System.out.println("User dengan username tersebut tidak ditemukan.");
+            System.out.println("====================================");
         }
     }
 }
@@ -139,10 +193,7 @@ class User {
     private String phoneNumber;
     private String address;
     private String password;
-    private String tanggalBooking;
-    private String waktuBooking;
-    private String tipeGedung;
-    private String opsiPembayaran;
+    private String[] bookingInfo = new String[4]; // Array untuk menyimpan info pemesanan
 
     public User(String nik, String username, String dateOfBirth, String phoneNumber, String address, String password) {
         this.nik = nik;
@@ -151,89 +202,112 @@ class User {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.password = password;
-        
     }
 
     public String getPassword() {
         return password;
     }
 
+    public String getNik() {
+        return nik;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 
     public void checkIn(Scanner scanner) {
-    System.out.println("=========");
-    System.out.println(" Check-in ");
-    System.out.println("=========");
-    System.out.print("Masukkan Tanggal : ");
-    tanggalBooking = scanner.nextLine();
-    System.out.print("Masukkan Jam (HH:mm): ");
-    waktuBooking = scanner.nextLine();
+        System.out.println("=========");
+        System.out.println(" Check-in ");
+        System.out.println("=========");
+        System.out.print("Masukkan Tanggal : ");
+        String tanggalBooking = scanner.nextLine();
+        System.out.print("Masukkan Jam (HH:mm): ");
+        String waktuBooking = scanner.nextLine();
 
-    // Pilihan opsi gedung
-    System.out.println("Pilih Opsi Gedung:");
-    System.out.println("1. Pernikahan");
-    System.out.println("2. Olahraga");
-    System.out.println("3. Rapat");
-    System.out.print("Masukkan Pilihan Gedung: ");
-    int memilihGedung = scanner.nextInt();
-    scanner.nextLine(); 
+        System.out.println("Pilih Opsi Gedung:");
+        System.out.println("1. Pernikahan");
+        System.out.println("2. Olahraga");
+        System.out.println("3. Rapat");
+        System.out.print("Masukkan Pilihan Gedung: ");
+        int memilihGedung = scanner.nextInt();
+        scanner.nextLine();
 
-    switch (memilihGedung) {
-        case 1:
-            tipeGedung = "Pernikahan";
-            break;
-        case 2:
-            tipeGedung = "Olahraga";
-            break;
-        case 3:
-            tipeGedung = "Rapat";
-            break;
-        default:
-            System.out.println("Pilihan Gedung tidak valid.");
-            return; 
+        switch (memilihGedung) {
+            case 1:
+                bookingInfo[0] = "Pernikahan";
+                break;
+            case 2:
+                bookingInfo[0] = "Olahraga";
+                break;
+            case 3:
+                bookingInfo[0] = "Rapat";
+                break;
+            default:
+                System.out.println("Pilihan Gedung tidak valid.");
+                return;
+        }
+        System.out.println("Pilih Opsi Pembayaran:");
+        System.out.println("1. DP");
+        System.out.println("2. Lunas");
+        System.out.print("Masukkan Pilihan Pembayaran: ");
+        int paymentChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (paymentChoice) {
+            case 1:
+                bookingInfo[1] = "DP";
+                break;
+            case 2:
+                bookingInfo[1] = "Lunas";
+                break;
+            default:
+                System.out.println("Pilihan Pembayaran tidak valid.");
+                return;
+        }
+
+        // Menyimpan info pemesanan
+        bookingInfo[2] = tanggalBooking;
+        bookingInfo[3] = waktuBooking;
+
+        System.out.println("Pemesanan berhasil!");
     }
-    System.out.println("Pilih Opsi Pembayaran:");
-    System.out.println("1. DP");
-    System.out.println("2. Lunas");
-    System.out.print("Masukkan Pilihan Pembayaran: ");
-    int paymentChoice = scanner.nextInt();
-    scanner.nextLine(); 
-
-    switch (paymentChoice) {
-        case 1:
-            opsiPembayaran = "DP";
-            break;
-        case 2:
-            opsiPembayaran = "Lunas";
-            break;
-        default:
-            System.out.println("Pilihan Pembayaran tidak valid.");
-            return; 
-    }
-
-    System.out.println("Pemesanan berhasil!");
-}
 
     public void viewBooking() {
-    if (tanggalBooking != null && waktuBooking != null && tipeGedung != null && opsiPembayaran != null) {
-        System.out.println("=======================");
-        System.out.println(" Informasi Pemesanan ");
-        System.out.println("=======================");
-        System.out.println("Tanggal Pemesanan: " + tanggalBooking);
-        System.out.println("Jam Pemesanan: " + waktuBooking);
-        System.out.println("Jenis Gedung: " + tipeGedung);
-        System.out.println("Opsi Pembayaran: " + opsiPembayaran);
-    } else {
-        System.out.println("Anda belum melakukan pemesanan.");
+        if (bookingInfo[2] != null && bookingInfo[3] != null && bookingInfo[0] != null && bookingInfo[1] != null) {
+            System.out.println("=======================");
+            System.out.println(" Informasi Pemesanan ");
+            System.out.println("=======================");
+            System.out.println("Tanggal Pemesanan: " + bookingInfo[2]);
+            System.out.println("Jam Pemesanan: " + bookingInfo[3]);
+            System.out.println("Jenis Gedung: " + bookingInfo[0]);
+            System.out.println("Opsi Pembayaran: " + bookingInfo[1]);
+        } else {
+            System.out.println("==============================");
+            System.out.println("Anda belum melakukan pemesanan");
+            System.out.println("==============================");
+        }
     }
-}
-    public void informasiUser() {
-    System.out.println("=======================");
-    System.out.println(" Informasi User ");
-    System.out.println("=======================");
-    System.out.println("NIK: " + nik);
-    System.out.println("Username: " + username);
-    System.out.println("No Telephone: " + phoneNumber);
-    System.out.println("Alamat: " + address);
-}
 
+    public void informasiUser() {
+        System.out.println("=======================");
+        System.out.println(" Informasi User ");
+        System.out.println("=======================");
+        System.out.println("NIK: " + nik);
+        System.out.println("Username: " + username);
+        System.out.println("No Telephone: " + phoneNumber);
+        System.out.println("Alamat: " + address);
+    }
 }
