@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ArrayRataNilai25 {
+public class ArrayRataNilai25_Sebelum {
     public static void main(String[] args) {
         int[] nilaiMhs = new int[10];
         Scanner sc = new Scanner(System.in);
