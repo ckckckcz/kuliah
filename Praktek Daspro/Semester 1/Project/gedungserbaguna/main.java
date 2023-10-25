@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.Arrays;
 
 public class main {
+    private static User[] users = new User[100]; // Array untuk menyimpan pengguna
+    private static int userCount = 0;
     private static Map<String, User> userMap = new HashMap<>();
     private static boolean isLoggedIn = false;
     private static User loggedInUser = null;
@@ -53,8 +55,18 @@ public class main {
         System.out.println("============");
         System.out.print("Masukkan NIK : ");
         String nik = scanner.nextLine();
+        
+        // Tambahkan kode untuk memeriksa apakah username telah digunakan
         System.out.print("Masukkan Username : ");
         String username = scanner.nextLine();
+        if (isUsernameTaken(username)) {
+            System.out.println("====================================");
+            System.out.println("Username telah digunakan. Silakan pilih username lain.");
+            System.out.println("====================================");
+            return;
+        }
+    
+        // Lanjutkan dengan meminta input lainnya
         System.out.print("Masukkan Tanggal Lahir : ");
         String dateOfBirth = scanner.nextLine();
         System.out.print("Masukkan No Telephone : ");
@@ -63,44 +75,67 @@ public class main {
         String address = scanner.nextLine();
         System.out.print("Masukkan Kata Sandi : ");
         String password = scanner.nextLine();
-
-        // fungsi ini berguna untuk menvalidasi jika user mengisi inputan atau tidak
-
-        if (nik.isEmpty() || username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty() || address.isEmpty() || dateOfBirth.isEmpty()){
+    
+        // Validasi input kosong
+        if (nik.isEmpty() || username.isEmpty() || password.isEmpty() || phoneNumber.isEmpty() || address.isEmpty() || dateOfBirth.isEmpty()) {
             System.out.println("======================================================");
             System.out.println("Tolong isi semua data yang diperlukan untuk mendaftar");
             System.out.println("======================================================");
             return;
         }
-
+    
         User newUser = new User(nik, username, dateOfBirth, phoneNumber, address, password);
-
-        userMap.put(username, newUser);
-
-        System.out.println("==================================================");
-        System.out.println(" Akun berhasil dibuat, anda sekarang sudah login ");
-        System.out.println("==================================================");
-        isLoggedIn = true;
-        loggedInUser = newUser;
+    
+        // Tambahkan pengguna ke array
+        if (userCount < users.length) {
+            users[userCount] = newUser;
+            userCount++;
+    
+            System.out.println("==================================================");
+            System.out.println(" Akun berhasil dibuat, anda sekarang sudah login ");
+            System.out.println("==================================================");
+            isLoggedIn = true;
+            loggedInUser = newUser;
+        } else {
+            System.out.println("==================================================");
+            System.out.println("Batas maksimum pengguna tercapai. Tidak dapat membuat akun.");
+            System.out.println("==================================================");
+        }
     }
+    private static boolean isUsernameTaken(String username) {
+        for (int i = 0; i < userCount; i++) {
+            if (users[i] != null && users[i].getUsername().equals(username)) {
+                return true; // Username sudah ada
+            }
+        }
+        return false; // Username belum digunakan
+    }
+    
 
     private static User login(Scanner scanner) {
         System.out.println("========");
         System.out.println(" Masuk ");
         System.out.println("=======");
-
+    
         while (true) {
             System.out.print("Masukkan Username : ");
             String username = scanner.nextLine();
             System.out.print("Masukkan Kata Sandi : ");
             String password = scanner.nextLine();
-
-            User user = userMap.get(username);
-            if (user != null && user.getPassword().equals(password)) {
+    
+            User foundUser = null;
+            for (int i = 0; i < userCount; i++) {
+                if (users[i] != null && users[i].getUsername().equals(username)) {
+                    foundUser = users[i];
+                    break;
+                }
+            }
+    
+            if (foundUser != null && foundUser.getPassword().equals(password)) {
                 System.out.println("==================================================");
                 System.out.println(" Masuk Berhasil. Selamat Datang, " + username + "!");
                 System.out.println("==================================================");
-                return user;
+                return foundUser;
             } else {
                 System.out.println("=======================================================");
                 System.out.println("Login gagal. Username atau password salah. Coba lagi.");
@@ -116,6 +151,7 @@ public class main {
             }
         }
     }
+    
 
     private static void userMenu(Scanner scanner) {
         while (true) {
@@ -180,9 +216,15 @@ public class main {
    private static void searchUser(Scanner scanner) {
     System.out.print("Masukkan Username yang ingin Anda cari: ");
     String usernameToSearch = scanner.nextLine();
-    User user = userMap.get(usernameToSearch);
+    User foundUser = null;
+        for (int i = 0; i < userCount; i++) {
+            if (users[i] != null && users[i].getUsername().equals(usernameToSearch)) {
+                foundUser = users[i];
+                break;
+            }
+        }
 
-    if (user != null) {
+    if (foundUser != null) {
         System.out.println("===================================================================================");
         System.out.println("            Informasi User yang Anda Cari");
         System.out.println("===================================================================================");
@@ -190,11 +232,11 @@ public class main {
         System.out.println("====================================================================================");
 
         // Format output menjadi tabel
-        String nik = String.format("%-15s", user.getNik());
-        String username = String.format("%-19s", user.getUsername());
-        String tanggalLahir = String.format("%-16s", user.getDateOfBirth());
-        String noTelephone = String.format("%-13s", user.getPhoneNumber());
-        String alamat = String.format("%-12s", user.getAddress());
+        String nik = String.format("%-15s", foundUser.getNik());
+        String username = String.format("%-19s", foundUser.getUsername());
+        String tanggalLahir = String.format("%-16s", foundUser.getDateOfBirth());
+        String noTelephone = String.format("%-13s", foundUser.getPhoneNumber());
+        String alamat = String.format("%-12s", foundUser.getAddress());
 
         System.out.println(nik + " | " + username + " | " + tanggalLahir + " | " + noTelephone + " | " + alamat);
     } else {
