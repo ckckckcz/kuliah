@@ -103,14 +103,14 @@ public class main {
         }
     }
     private static boolean isUsernameTaken(String username) {
-        for (int i = 0; i < userCount; i++) {
-            if (users[i] != null && users[i].getUsername().equals(username)) {
-                return true; // Username sudah ada
-            }
+    for (int i = 0; i < userCount; i++) {
+        if (users[i] != null && users[i].getUsername().equals(username)) {
+            return true; // Username sudah ada
         }
-        return false; // Username belum digunakan
     }
-    
+    return false; // Username belum digunakan
+}
+
 
     private static User login(Scanner scanner) {
         System.out.println("========");
