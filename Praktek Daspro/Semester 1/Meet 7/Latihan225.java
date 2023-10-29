@@ -1,4 +1,4 @@
-public class Latihan325 {
+public class Latihan225 {
     public static void main(String[] args) {
         int i = 25;
         int sum = 0;
