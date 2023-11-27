@@ -1,20 +1,11 @@
 import java.util.Scanner;
 
-public class TugasLimaSiswa325{
+public class begitu {
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("Masukkan jumlah mahasiswa: ");
-        int jumlahMahasiswa = input.nextInt();
-
-        System.out.print("Masukkan jumlah tugas: ");
-        int jumlahTugas = input.nextInt();
-
-        int[][] nilai = new int[jumlahMahasiswa][jumlahTugas];
-        String[] nama = new String[jumlahMahasiswa];
-
-        inputDataMahasiswa(nilai, nama); // input data nilai dari mahasiswa
+        int[][] nilai = new int[5][7];
+        String[] nama = {"Sari", "Rina", "Yani", "Dwi", "Lusi"};
+        inputDataNilai(nilai, nama); // input data nilai dari mahasiswa
         tampilSeluruhNilai(nilai, nama); // menampilkan seluruh nilai mahasiswa
         int hariTertinggi = cariHariNilaiTertinggi(nilai);
         System.out.println("");
@@ -22,21 +13,6 @@ public class TugasLimaSiswa325{
         System.out.println("");
         tampilMahasiswaTertinggi(nilai, nama); // Menampilkan mahasiswa dengan nilai tertinggi
         int hariTertinggiSemua = cariHariTertinggiSemua(nilai);
-    }
-
-    // Fungsi untuk input data nilai mahasiswa
-    public static void inputDataMahasiswa(int[][] nilai, String[] nama) {
-        Scanner input = new Scanner(System.in);
-        for (int i = 0; i < nilai.length; i++) {
-            System.out.print("Masukkan nama mahasiswa ke-" + (i + 1) + ": ");
-            nama[i] = input.nextLine();
-            System.out.println("Input data nilai mahasiswa " + nama[i] + ":");
-            for (int j = 0; j < nilai[i].length; j++) {
-                System.out.print("Nilai tugas ke-" + (j + 1) + ": ");
-                nilai[i][j] = input.nextInt();
-            }
-            input.nextLine(); // Membersihkan buffer
-        }
     }
 
     // Fungsi untuk input data nilai mahasiswa

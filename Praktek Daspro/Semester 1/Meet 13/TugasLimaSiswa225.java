@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TugasLimaSiswa225 {
+public class TugasLimaSiswa225{
 
     public static void main(String[] args) {
         int[][] nilai = new int[5][7];
@@ -8,8 +8,9 @@ public class TugasLimaSiswa225 {
         inputDataNilai(nilai, nama); // input data nilai dari mahasiswa
         tampilSeluruhNilai(nilai, nama); // menampilkan seluruh nilai mahasiswa
         int hariTertinggi = cariHariNilaiTertinggi(nilai);
-        System.out.println("Hari dengan nilai tertinggi: " + hariTertinggi);   // Cari hari dengan nilai tertinggi
-        tampilMahasiswaY(nilai, nama);
+        System.out.println("");
+        System.out.println("Minggu dengan nilai tertinggi adalah : " + "Minggu ke -" + hariTertinggi);   // Cari hari dengan nilai tertinggi
+        System.out.println("");
         tampilMahasiswaTertinggi(nilai, nama); // Menampilkan mahasiswa dengan nilai tertinggi
     }
 
@@ -17,7 +18,7 @@ public class TugasLimaSiswa225 {
     public static void inputDataNilai(int[][] nilai, String[] nama) {
         Scanner input = new Scanner(System.in);
         for (int i = 0; i < nilai.length; i++) {
-            System.out.println("Input data nilai mahasiswa ke-" + (i + 1) + ":");
+            System.out.println("Input data nilai mahasiswa " + nama[i] + ":");
             for (int j = 0; j < nilai[i].length; j++) {
                 System.out.print("Nilai minggu ke-" + (j + 1) + ": ");
                 nilai[i][j] = input.nextInt();
@@ -27,15 +28,20 @@ public class TugasLimaSiswa225 {
 
     // Fungsi untuk menampilkan seluruh nilai mahasiswa
     public static void tampilSeluruhNilai(int[][] nilai, String[] nama) {
+        System.out.println("");
         System.out.println("Data nilai mahasiswa:");
-        System.out.println("No | Nama | Minggu 1 | Minggu 2 | Minggu 3 | Minggu 4 | Minggu 5 | Minggu 6 | Minggu 7");
+        System.out.println("");
+        System.out.println("+----+------+---------+---------+---------+---------+---------+---------+---------+");
+        System.out.println("| No | Nama | Minggu1 | Minggu2 | Minggu3 | Minggu4 | Minggu5 | Minggu6 | Minggu7 |");
+        System.out.println("+----+------+---------+---------+---------+---------+---------+---------+---------+");
         for (int i = 0; i < nilai.length; i++) {
-            System.out.print((i + 1) + " | " + nama[i] + " | ");
+            System.out.printf("| %-2d | %-4s |", (i + 1), nama[i]);
             for (int j = 0; j < nilai[i].length; j++) {
-                System.out.print(nilai[i][j] + " | ");
+                System.out.printf(" %-7d |", nilai[i][j]);
             }
             System.out.println();
         }
+        System.out.println("+----+------+---------+---------+---------+---------+---------+---------+---------+");
     }
 
     // Fungsi untuk mencari hari dengan nilai tertinggi
@@ -51,21 +57,6 @@ public class TugasLimaSiswa225 {
             }
         }
         return hariTertinggi;
-    }
-
-    // Fungsi untuk menampilkan mahasiswa y
-    public static void tampilMahasiswaY(int[][] nilai, String[] nama) {
-        System.out.println("Mahasiswa y:");
-        System.out.println("No | Nama | Minggu 1 | Minggu 2 | Minggu 3 | Minggu 4 | Minggu 5 | Minggu 6 | Minggu 7");
-        for (int i = 0; i < nilai.length; i++) {
-            if (nama[i].equals("Yani")) {
-                System.out.print((i + 1) + " | " + nama[i] + " | ");
-                for (int j = 0; j < nilai[i].length; j++) {
-                    System.out.print(nilai[i][j] + " | ");
-                }
-                System.out.println();
-            }
-        }
     }
 
     // Fungsi untuk menampilkan mahasiswa dengan nilai tertinggi
@@ -84,9 +75,33 @@ public class TugasLimaSiswa225 {
             }
         }
 
-        System.out.println("Mahasiswa dengan nilai tertinggi:");
-        System.out.println("Nama: " + nama[indexMahasiswaTertinggi]);
+        System.out.println("Mahasiswa dengan nilai tertinggi: " + nama[indexMahasiswaTertinggi] + " pada minggu ke-" + mingguTertinggi);  
+        System.out.println("");  
         System.out.println("Nilai tertinggi: " + nilaiTertinggi + " pada minggu ke-" + mingguTertinggi);
+        System.out.println("");
+    }
+
+    // Fungsi untuk mencari hari dengan nilai tertinggi dari keseluruhan mahasiswa
+    public static int cariHariTertinggiSemua(int[][] nilai) {
+        int[] totalNilaiPerHari = new int[7];
+
+        // Menghitung total nilai per hari dari semua mahasiswa
+        for (int i = 0; i < nilai.length; i++) {
+            for (int j = 0; j < nilai[i].length; j++) {
+                totalNilaiPerHari[j] += nilai[i][j];
+            }
+        }
+
+        // Mencari hari dengan nilai tertinggi dari keseluruhan mahasiswa
+        int hariTertinggiSemua = 0;
+        int nilaiTertinggiSemua = 0;
+        for (int i = 0; i < totalNilaiPerHari.length; i++) {
+            if (totalNilaiPerHari[i] > nilaiTertinggiSemua) {
+                nilaiTertinggiSemua = totalNilaiPerHari[i];
+                hariTertinggiSemua = i + 1;
+            }
+        }
+
+        return hariTertinggiSemua;
     }
 }
-    
