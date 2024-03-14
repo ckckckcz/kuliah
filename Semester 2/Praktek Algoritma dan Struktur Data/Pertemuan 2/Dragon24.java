@@ -42,3 +42,25 @@ public class Dragon24{
         System.exit(0);
     }
 }
+
+// LIST
+
+
+// public class quiz {
+    
+//     int keliling;
+//     int sisi;
+
+//     public quiz(){
+//     }
+
+//     public quiz(int keliling, int sisi){
+//         this.sisi = sisi;
+//         keliling = sisi * 4;
+//     }
+
+//     public static void main(String[] args) {
+//         quiz p[] = new quiz[2];
+//     }
+// }
+
