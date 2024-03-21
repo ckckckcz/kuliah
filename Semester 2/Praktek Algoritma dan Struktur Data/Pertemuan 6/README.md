@@ -477,7 +477,7 @@ Benar, data mahasiswa menampilkan urut menaik berdasarkan IPK
 
 ---
 
-## Latihan Praktikum
+## 5.5 Latihan Praktikum
 
 <p>
 Sebuah platform travel yang menyediakan layanan pemesanan kebutuhan travelling sedang
@@ -492,7 +492,7 @@ bubble sort dan selection sort. <br>
 
 <img src="./img/img8.png">
 
-### 5.2.2 Verifikasi Hasil Percobaan
+### 5.5.2 Verifikasi Hasil Percobaan
 
 - Code `Hotel.java`
 
