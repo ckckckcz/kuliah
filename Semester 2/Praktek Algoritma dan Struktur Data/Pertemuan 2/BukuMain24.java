@@ -1,3 +1,5 @@
+import P7.Buku24;
+
 public class BukuMain24 {
 
     public static void main(String[] args) {
