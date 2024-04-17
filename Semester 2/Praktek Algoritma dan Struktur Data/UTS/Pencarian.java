@@ -1,13 +1,26 @@
 public class Pencarian {
-    // Fungsi Pencarian Sebelum di menjalankan Pengurutan
-    public static int sequentialSearch(int[] arr, int nilai) {
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == nilai) {
-                return i;
+    public static int binarySearch2(int[] arr, int nilai) {
+        int left = 0;
+        int right = arr.length - 1;
+    
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (arr[mid] == nilai) {
+                return mid;
+            } else {
+                if (arr[left] == nilai) {
+                    return left;
+                }
+                if (arr[right] == nilai) {
+                    return right;
+                }
+                left++;
+                right--;
             }
         }
         return -1;
     }
+    
     
     // Fungsi Pencarian Setelah sudah menjalankan pengurutan ascending dan descending
     public static int binarySearch(int[] arr, int nilai, boolean ascending) {
@@ -27,5 +40,4 @@ public class Pencarian {
     
         return -1;
     }
-    
 }

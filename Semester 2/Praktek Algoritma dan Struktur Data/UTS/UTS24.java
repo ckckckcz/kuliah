@@ -46,7 +46,7 @@ public class UTS24 {
         Arrays.sort(arrDescending);
         pergantianArray(arrDescending);
     
-        int indexBeforeSort = Pencarian.sequentialSearch(arr, nilai);
+        int indexBeforeSort = Pencarian.binarySearch2(arr, nilai);
         int indexAfterSortAscending = Pencarian.binarySearch(arrAscending, nilai, true);
         int indexAfterSortDescending = Pencarian.binarySearch(arrDescending, nilai, false);
         
