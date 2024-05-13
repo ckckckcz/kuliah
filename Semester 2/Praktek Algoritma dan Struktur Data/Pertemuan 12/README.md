@@ -408,3 +408,9 @@
 
 - `Hasil Percobaan`<br>
   <img src="./img/img3.png">
+
+---
+
+## 4. Tugas
+
+### 4.1.1 Verifikasi Hasil Percobaan

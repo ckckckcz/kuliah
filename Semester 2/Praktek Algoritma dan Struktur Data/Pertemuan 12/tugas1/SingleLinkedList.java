@@ -1,4 +1,4 @@
-package tugas;
+package tugas1;
 
 public class SingleLinkedList {
     Node head, tail;

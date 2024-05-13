@@ -1,4 +1,4 @@
-package tugas;
+package tugas2;
 
 public class Node {
     int data;
