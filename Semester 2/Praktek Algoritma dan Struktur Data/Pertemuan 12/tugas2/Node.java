@@ -1,16 +1,16 @@
 package tugas2;
 
 public class Node {
-    int data;
-    Node next;
+    int id; 
+    String judul;
+    double rating;
+    Node prev, next;
 
-    public Node(int data, Node berikutnya){
-        this.data = data;
-        this.next = berikutnya;
-    }
-
-    public Node(int data){
-        this.data = data;
-        this.next = null;
+    Node (Node prev, int id, String judul, double rating, Node next) {
+        this.prev = prev;
+        this.id = id;
+        this.judul = judul;
+        this.rating = rating;
+        this.next = next;
     }
 }
