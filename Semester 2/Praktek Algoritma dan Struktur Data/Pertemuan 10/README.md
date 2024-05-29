@@ -1,4 +1,4 @@
-# <p align="center">Pertemuan 10 - Jobsheet 10 Stack </p>
+# <p align="center">Pertemuan 10 - Jobsheet 10 Queue </p>
 
 <br><br>
 
