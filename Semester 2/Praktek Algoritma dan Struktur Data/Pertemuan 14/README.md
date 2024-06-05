@@ -348,13 +348,13 @@ public class BinaryTreeArrayMain24 {
    Befungsi untuk mengisi array data dengan element tree dan juga menetapkan idxlast untuk menentukan batas akhir element valid<br><br>
 3. Apakah kegunaan dari method traverseInOrder()?<br><br>
    `JAWAB`<br><br>
-   Untuk melakuukan left-root-right pada binary tree yang disimpan dalam array dan akan diprint elemnt tree tersebut
+   Untuk melakuukan left-root-right pada binary tree yang disimpan dalam array dan akan diprint elemnt tree tersebut<br><br>
 4. Jika suatu node binary tree disimpan dalam array indeks 2, maka di indeks berapakah posisi left child dan rigth child masin-masing?<br><br>
    `JAWAB`<br><br>
-   `Left child`, Indeks 5 (2 \* 2 + 1), `Right Child`, Indeks 6 (2 \* 2 + 2).
+   `Left child`, Indeks 5 (2 \* 2 + 1), `Right Child`, Indeks 6 (2 \* 2 + 2).<br><br>
 5. Apa kegunaan statement int idxLast = 6 pada praktikum 2 percobaan nomor 4?<br><br>
    `JAWAB`<br><br>
-   Untuk menetapkan indeks terakhir pada element valid dalam array data untuk memastikan traversal hanya mengunjungi element yang valid
+   Untuk menetapkan indeks terakhir pada element valid dalam array data untuk memastikan traversal hanya mengunjungi element yang valid<br><br>
 
 ## 13.4 Tugas Praktikum
 
