@@ -10,6 +10,6 @@
 }
 .tulisan_satu {
   color: blue;
-  font-family: bold;
-  font-family: oblique;
+  font-weight: bold;
+  font-style: oblique;
 }
