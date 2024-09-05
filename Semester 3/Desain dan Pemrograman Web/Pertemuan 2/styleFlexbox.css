@@ -10,3 +10,11 @@ body {
   line-height: 1.65;
   padding-bottom: 1000px;
 }
+.container-satu {
+  width: 800px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+}
