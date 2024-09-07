@@ -1,16 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap");
 body {
   display: flex;
-  background: gray;
+  background: #23487d;
   justify-content: center;
   align-items: center;
   background-repeat: repeat;
+  font-family: "Mukta", sans-serif;
 }
 
 .containerUtama {
   display: flex;
   box-sizing: border-box;
   width: 80%;
-  background-color: white;
+  background-color: #d3f350;
   border-radius: 30px;
   padding: 1rem;
   margin: 2rem 0;
@@ -26,7 +28,10 @@ body {
   padding-right: 0;
   order: 2;
 }
-
+.sidebarSatu a {
+  text-decoration: none;
+  color: #23487d;
+}
 .sidebarDua {
   order: 3;
 }
