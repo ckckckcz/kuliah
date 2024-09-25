@@ -61,7 +61,6 @@ foreach ($daftarNilai[$mataKuliah] as $nilai) {
 
 echo "<br>";
 
-// Soal Cerita
 $nilaiMatematika = [
     'Alice' => 85,
     'Bob' => 92,
