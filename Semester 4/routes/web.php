@@ -1,17 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PhotoController;
 
 Route::get('/', function () {
     return 'Selamat Datang';
@@ -45,17 +36,51 @@ Route::get('/', function () {
 // //     return 'Nama saya '.$name;
 // // });
 
-Route::get('/user/profile', function () {
-    return 'Ini adalah profil user';
-})->name('profile');
+// Route::get('/user/profile', function () {
+//     return 'Ini adalah profil user';
+// })->name('profile');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/user', function () { return 'Admin - User'; });
-    Route::get('/post', function () { return 'Admin - Post'; });
-    Route::get('/event', function () { return 'Admin - Event'; });
+// Route::prefix('admin')->group(function () {
+//     Route::get('/user', function () { return 'Admin - User'; });
+//     Route::get('/post', function () { return 'Admin - Post'; });
+//     Route::get('/event', function () { return 'Admin - Event'; });
+// });
+
+// Route::redirect('/here', '/there');
+
+// Route::view('/welcome', 'welcome');
+// Route::view('/welcome', 'welcome', ['name' => 'Riovaldo']);
+
+// Route::get('/hello', [WelcomeController::class, 'hello']);
+
+// Route::get('/greeting', [WelcomeController::class, 'greeting']);
+
+// Route::resource('photos', PhotoController::class)->only([
+//     'index',
+//     'show'
+// ]);
+// Route::resource('photos', PhotoController::class)->except([
+//     'create',
+//     'store',
+//     'update',
+//     'destroy'
+// ]);
+
+Route::prefix('category')->group(function () {
+    Route::get('/food-beverage', function () {
+        return view('category.food'); });
+    Route::get('/beauty-health', function () {
+        return view('category.beauty'); });
+    Route::get('/home-care', function () {
+        return view('category.homecare'); });
+    Route::get('/baby-kid', function () {
+        return view('category.babykid'); });
 });
 
-Route::redirect('/here', '/there');
+Route::get('/user/{id}/name/{name}', function ($id, $name) {
+    return "Profil User ID: $id, Nama: $name";
+});
 
-Route::view('/welcome', 'welcome');
-Route::view('/welcome', 'welcome', ['name' => 'Riovaldo']);
+Route::get('/sales', function () {
+    return view('sales.index');
+});
