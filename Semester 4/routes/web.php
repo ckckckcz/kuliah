@@ -17,30 +17,45 @@ Route::get('/', function () {
     return 'Selamat Datang';
 });
 
-Route::get('/hello', function(){
-    return 'Hello World';
+// Route::get('/hello', function(){
+//     return 'Hello World';
+// });
+
+// Route::get('/world', function(){
+//     return 'World';
+// });
+
+// Route::get('/about', function(){
+//     return '2341720209 - ' . ' Riovaldo Alfiyan Fahmi Rahman';
+// });
+
+// Route::get('/user/{name}', function ($name) {
+//     return 'Nama saya '.$name;
+// });
+
+// Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
+//     return 'Pos ke-'.$postId." Komentar ke-: ".$commentId;
+// });
+
+// Route::get('/articles/{id}', function ($id){
+//     return 'Halaman Artikel dengan ID '. $id;
+// });
+
+// // Route::get('/user/{name?}', function($name='John'){
+// //     return 'Nama saya '.$name;
+// // });
+
+Route::get('/user/profile', function () {
+    return 'Ini adalah profil user';
+})->name('profile');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/user', function () { return 'Admin - User'; });
+    Route::get('/post', function () { return 'Admin - Post'; });
+    Route::get('/event', function () { return 'Admin - Event'; });
 });
 
-Route::get('/world', function(){
-    return 'World';
-});
+Route::redirect('/here', '/there');
 
-Route::get('/about', function(){
-    return '2341720209 - ' . ' Riovaldo Alfiyan Fahmi Rahman';
-});
-
-Route::get('/user/{name}', function ($name) {
-    return 'Nama saya '.$name;
-});
-
-Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
-    return 'Pos ke-'.$postId." Komentar ke-: ".$commentId;
-});
-
-Route::get('/articles/{id}', function ($id){
-    return 'Halaman Artikel dengan ID '. $id;
-});
-
-Route::get('/user/{name?}', function($name='John'){
-    return 'Nama saya '.$name;
-});
+Route::view('/welcome', 'welcome');
+Route::view('/welcome', 'welcome', ['name' => 'Riovaldo']);
