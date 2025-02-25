@@ -53,18 +53,21 @@ Route::get('/', function () {
 
 // Route::get('/hello', [WelcomeController::class, 'hello']);
 
-// Route::get('/greeting', [WelcomeController::class, 'greeting']);
+Route::get('/greeting', [WelcomeController::class, 'greeting']);
+// Route::get('/greeting', function(){
+//     return view('hello', ['name' => 'Riovaldo']);
+// });
 
-// Route::resource('photos', PhotoController::class)->only([
-//     'index',
-//     'show'
-// ]);
-// Route::resource('photos', PhotoController::class)->except([
-//     'create',
-//     'store',
-//     'update',
-//     'destroy'
-// ]);
+Route::resource('photos', PhotoController::class)->only([
+    'index',
+    'show'
+]);
+Route::resource('photos', PhotoController::class)->except([
+    'create',
+    'store',
+    'update',
+    'destroy'
+]);
 
 Route::prefix('category')->group(function () {
     Route::get('/food-beverage', function () {
