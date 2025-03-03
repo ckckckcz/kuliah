@@ -20,6 +20,11 @@ food_high = fuzz.smf(x_food, 5, 10);
 service_score = 9.5;
 food_score = 4.0;
 
+# Pertanyaan 1
+service_score = 9.5;
+food_score = 4.0;
+
+
 service_low_degree = fuzz.interp_membership(
     x_service, service_low, service_score
 )
@@ -102,6 +107,13 @@ z2 = 5.0 + 0.5 * food_score + 0.5 * service_score
 z3 = 5 + 1.0 * food_score + 1.0 * service_score
 z = (w1 * z1 + w2 * z2 + w3 * z3) / (w1 + w2 + w3)
 print(z)
+
+# Pertanyaan 1
+
+z_final = (low_degree * z1 + middle_degree * z2 + high_degree * z3) / (low_degree + middle_degree + high_degree)
+
+# Pertanyaan 1 Output hasil tip
+print(f"Tip yang diberikan: {z_final:.2f}")
 
 plt.plot(z1, w1, label="low tip", marker=".")
 plt.xlim(0, 25)
