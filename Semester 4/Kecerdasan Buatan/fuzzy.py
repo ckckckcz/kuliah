@@ -108,12 +108,12 @@ z3 = 5 + 1.0 * food_score + 1.0 * service_score
 z = (w1 * z1 + w2 * z2 + w3 * z3) / (w1 + w2 + w3)
 print(z)
 
-# Pertanyaan 1
+# # Pertanyaan 1
 
-z_final = (low_degree * z1 + middle_degree * z2 + high_degree * z3) / (low_degree + middle_degree + high_degree)
+# z_final = (low_degree * z1 + middle_degree * z2 + high_degree * z3) / (low_degree + middle_degree + high_degree)
 
-# Pertanyaan 1 Output hasil tip
-print(f"Tip yang diberikan: {z_final:.2f}")
+# # Pertanyaan 1 Output hasil tip
+# print(f"Tip yang diberikan: {z_final:.2f}")
 
 plt.plot(z1, w1, label="low tip", marker=".")
 plt.xlim(0, 25)
@@ -129,3 +129,5 @@ plt.vlines(z3, 0.0, w3)
 plt.plot(z, 0.0, label="final tip", marker="o")
 
 plt.legend(loc="upper left")
+
+plt.show()
