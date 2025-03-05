@@ -11,6 +11,7 @@
             <th>Username</th>
             <th>Nama</th>
             <th>ID Level Pengguna</th>
+            <th>Password</th>
         </tr>
 
         @foreach ($data as $d)
@@ -19,6 +20,7 @@
             <td>{{ $d->username }}</td>
             <td>{{ $d->nama }}</td>
             <td>{{ $d->level_id }}</td>
+            <td>{{ $d->password }}</td>
         </tr>
         @endforeach
 
