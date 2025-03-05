@@ -36,5 +36,10 @@ class UserController extends Controller
 
         // return view('user', ['data' => $user]);
 
+        // $user = UserModel::findOrFail(1);
+        // return view('user', ['data' => $user]);
+
+        $user = UserModel::where('username', 'manager9')->firstOrFail();
+        return view('user', ['data' => $user]);
     }
 }
