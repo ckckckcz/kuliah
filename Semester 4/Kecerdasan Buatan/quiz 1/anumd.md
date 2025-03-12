@@ -80,8 +80,8 @@ Input yang diberikan:
 ```python
 subsidi_simulasi.compute()
 
-alpha_values = [5, 8]
-z_values_new = [4.5, 2.95] 
+alpha_values = [5, 8]  # Nilai α dari aturan fuzzy
+z_values_new = [4.5, 2.95]  # Z baru yang telah diperbaiki
 manual_defuzz = sum(a * z for a, z in zip(alpha_values, z_values_new)) / sum(alpha_values)
 ```
 **Letak Perhitungan Fuzzy Tsukamoto:**
