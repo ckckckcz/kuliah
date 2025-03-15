@@ -46,7 +46,7 @@ Fungsi keanggotaan dibuat menggunakan **Triangular Membership Function (trimf)**
 
 ### 4. Membuat Aturan Fuzzy
 ```python
-rule1 = ctrl.Rule(luas_lahan['kecil'] & produksi_padi['rendah'], subsidi['rendah'])
+rule1 = ctrl.Rule(luas_lahan['kvcil'] & produksi_padi['rendah'], subsidi['rendah'])
 rule2 = ctrl.Rule(luas_lahan['kecil'] & produksi_padi['sedang'], subsidi['sedang'])
 rule3 = ctrl.Rule(luas_lahan['kecil'] & produksi_padi['tinggi'], subsidi['tinggi'])
 rule4 = ctrl.Rule(luas_lahan['sedang'] & produksi_padi['rendah'], subsidi['rendah'])
