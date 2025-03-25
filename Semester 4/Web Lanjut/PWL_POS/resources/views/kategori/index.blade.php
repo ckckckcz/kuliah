@@ -54,8 +54,8 @@
                     "dataType": "json",
                     "type": "POST",
                 },
-                columns: [{
-                        // nomor urut dari laravel datatable addIndexColumn()
+                columns: [
+                    {
                         data: "DT_RowIndex",
                         className: "text-center",
                         orderable: false,
