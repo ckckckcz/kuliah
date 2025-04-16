@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\Facades\Image;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -56,30 +57,30 @@ class ProfileController extends Controller
         $fileName = "user_" . $user->user_id . "." . $request->file('profile_picture')->getClientOriginalExtension();
         $filePath = "profile_pictures/" . $fileName;
 
-        // Process the image
-        $img = Image::read($request->file('profile_picture')->path())
+        // Process the image using Intervention Image
+        $img = Image::make($request->file('profile_picture')->path())
             ->resize(300, 300);
-        // Save the processed image
-        $img->save(storage_path('app/public/' . $filePath));
+
+        // Save the processed image to the public disk
+        Storage::disk('public')->put($filePath, (string) $img->encode());
 
         // Update user picture_url
-        $user->picture_url = $filePath;
+        $user->profile_picture = $filePath;
 
         if ($user->save()) {
             return response()->json([
                 'status' => true,
                 'message' => 'Foto profil berhasil diperbarui!'
             ]);
-
         } else {
-            // Rollback the file deletion if save fails
+            // Rollback the file upload if save fails
             if (Storage::disk('public')->exists($filePath)) {
                 Storage::disk('public')->delete($filePath);
             }
 
             return response()->json([
-                'status' => true,
-                'message' => 'Foto profil Gagal diperbarui!'
+                'status' => false,
+                'message' => 'Foto profil gagal diperbarui!'
             ]);
         }
     }
