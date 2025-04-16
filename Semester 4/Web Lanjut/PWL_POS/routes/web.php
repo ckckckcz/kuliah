@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
@@ -31,6 +32,12 @@ Route::post('register', [AuthController::class, 'postRegister']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [WelcomeController::class, 'index']);
 
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::get('/edit_picture', [ProfileController::class, 'edit_picture']);
+        Route::put('/update_picture', [ProfileController::class, 'update_picture']);
+    });
+
     Route::middleware(['authorize:ADM'])->group(function () {
         Route::group(['prefix' => 'user'], function () {
             Route::get('/', [UserController::class, 'index']);
@@ -39,6 +46,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/', [UserController::class, 'store']);
             Route::get('/create_ajax', [UserController::class, 'create_ajax']);
             Route::post('/ajax', [UserController::class, 'store_ajax']);
+            Route::get('/import', [UserController::class, 'import']);
+            Route::post('/import_ajax', [UserController::class, 'import_ajax']);
+            Route::get('/export_excel', [UserController::class, 'export_excel']);
+            Route::get('/export_pdf', [UserController::class, 'export_pdf']);
             Route::get('/{id}', [UserController::class, 'show']);
             Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
             Route::get('/{id}/edit', [UserController::class, 'edit']);
@@ -57,6 +68,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/', [LevelController::class, 'store']);
             Route::get('/create_ajax', [LevelController::class, 'create_ajax']);
             Route::post('/ajax', [LevelController::class, 'store_ajax']);
+            Route::get('/import', [LevelController::class, 'import']);
+            Route::post('/import_ajax', [LevelController::class, 'import_ajax']);
+            Route::get('/export_excel', [LevelController::class, 'export_excel']);
+            Route::get('/export_pdf', [LevelController::class, 'export_pdf']);
             Route::get('/{id}', [LevelController::class, 'show']);
             Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
             Route::get('/{id}/edit', [LevelController::class, 'edit']);
@@ -77,6 +92,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/', [KategoriController::class, 'store']);
             Route::get('/create_ajax', [KategoriController::class, 'create_ajax']);
             Route::post('/ajax', [KategoriController::class, 'store_ajax']);
+            Route::get('/import', [KategoriController::class, 'import']);
+            Route::post('/import_ajax', [KategoriController::class, 'import_ajax']);
+            Route::get('/export_excel', [KategoriController::class, 'export_excel']);
+            Route::get('/export_pdf', [KategoriController::class, 'export_pdf']);
             Route::get('/{id}', [KategoriController::class, 'show']);
             Route::get('/{id}/show_ajax', [KategoriController::class, 'show_ajax']);
             Route::get('/{id}/edit', [KategoriController::class, 'edit']);
@@ -96,6 +115,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/', [SupplierController::class, 'store']);
             Route::get('/create_ajax', [SupplierController::class, 'create_ajax']);
             Route::post('/ajax', [SupplierController::class, 'store_ajax']);
+            Route::get('/import', [SupplierController::class, 'import']);
+            Route::post('/import_ajax', [SupplierController::class, 'import_ajax']);
+            Route::get('/export_excel', [SupplierController::class, 'export_excel']);
+            Route::get('/export_pdf', [SupplierController::class, 'export_pdf']);
             Route::get('/{id}', [SupplierController::class, 'show']);
             Route::get('/{id}/show_ajax', [SupplierController::class, 'show_ajax']);
             Route::get('/{id}/edit', [SupplierController::class, 'edit']);
@@ -114,6 +137,10 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/', [BarangController::class, 'store']);
             Route::get('/create_ajax', [BarangController::class, 'create_ajax']);
             Route::post('/ajax', [BarangController::class, 'store_ajax']);
+            Route::get('/import', [BarangController::class, 'import']);
+            Route::post('/import_ajax', [BarangController::class, 'import_ajax']);
+            Route::get('/export_excel', [BarangController::class, 'export_excel']);
+            Route::get('/export_pdf', [BarangController::class, 'export_pdf']);
             Route::get('/{id}', [BarangController::class, 'show']);
             Route::get('/{id}/show_ajax', [BarangController::class, 'show_ajax']);
             Route::get('/{id}/edit', [BarangController::class, 'edit']);

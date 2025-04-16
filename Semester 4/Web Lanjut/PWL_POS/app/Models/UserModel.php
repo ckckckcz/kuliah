@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Storage;
 
 class UserModel extends Authenticatable
 {
@@ -16,6 +17,7 @@ class UserModel extends Authenticatable
         'level_id',
         'username',
         'nama',
+        'picture_url',
         'password',
     ];
 

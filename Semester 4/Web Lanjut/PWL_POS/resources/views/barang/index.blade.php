@@ -5,7 +5,11 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('barang/create') }}">Tambah</a>
+                <button onclick="modalAction('{{ url('barang/import') }}')" class="btn btn-info">Import Barang</button>
+                <a href="{{ url('barang/export_excel') }}" class="btn btn-primary"><i class="fa fa-file-excel"></i> Export
+                    Excel</a>
+                <a href="{{ url('barang/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file-pdf"></i> Export
+                    Pdf</a>
                 <button onclick="modalAction('{{ url('barang/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah
                     Ajax</button>
             </div>
@@ -69,6 +73,7 @@
 
             dataBarang = $('#table_barang').DataTable({
                 // serverSide: true, jika ingin menggunakan server side processing
+                processing: true,
                 serverSide: true,
                 ajax: {
                     "url": "{{ url('barang/list') }}",
@@ -82,6 +87,7 @@
                         // nomor urut dari laravel datatable addIndexColumn()
                         data: "DT_RowIndex",
                         className: "text-center",
+                        width: "5%",
                         orderable: false,
                         searchable: false
                     },
@@ -89,6 +95,7 @@
                     {
                         data: "barang_kode",
                         className: "",
+                        width: "10%",
                         orderable: true,
                         searchable: true
                     },
@@ -96,6 +103,7 @@
                     {
                         data: "barang_nama",
                         className: "",
+                        width: "37%",
                         orderable: true,
                         searchable: true
                     },
@@ -103,7 +111,8 @@
                     {
                         data: "harga_beli",
                         className: "",
-                        orderable: false,
+                        width: "10%",
+                        orderable: true,
                         searchable: false,
                         render: function(data, type, row) {
                             return "Rp " + new Intl.NumberFormat("id-ID").format(data);
@@ -113,7 +122,8 @@
                     {
                         data: "harga_jual",
                         className: "",
-                        orderable: false,
+                        width: "10%",
+                        orderable: true,
                         searchable: false,
                         render: function(data, type, row) {
                             return "Rp " + new Intl.NumberFormat("id-ID").format(data);
@@ -123,13 +133,15 @@
                     {
                         data: "kategori.kategori_nama",
                         className: "",
-                        orderable: false,
+                        width: "14%",
+                        orderable: true,
                         searchable: false
                     },
 
                     {
                         data: "aksi",
                         className: "",
+                        width: "14%",
                         orderable: false,
                         searchable: false
                     }

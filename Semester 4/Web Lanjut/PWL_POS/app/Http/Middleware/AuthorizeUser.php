@@ -1,17 +1,26 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthorizeUser
 {
-    public function handle(Request $request, Closure $next, ...$levels)
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next, string ...$roles): Response
     {
-        if (Auth::check() && in_array(Auth::user()->level_id, $levels)) {
+        $user_role = $request->user()->getRole();
+
+        if (in_array($user_role, $roles)) {
             return $next($request);
         }
-        return redirect('login')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+
+        abort(403, 'Forbidden. Kamu tidak punya akses ke halaman ini');
     }
 }
