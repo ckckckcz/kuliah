@@ -13,7 +13,7 @@
                             <div class="text-center">
                                 <div class="position-relative d-inline-block">
                                     <img class="profile-user-img img-fluid img-circle"
-                                        src="{{ $user->picture_url ? asset('storage/' . $user->picture_url) : 'adminlte/dist/img/rio.png' }}"
+                                        src="{{ $user->picture_url ? asset('storage/' . $user->picture_url) : 'adminlte/dist/img/user4-128x128.jpg' }}"
                                         alt="User profile picture">
                                     <button onclick="modalAction('{{ url('profile/edit_picture') }}')"
                                         class="btn btn-primary btn-sm rounded-circle position-absolute"
